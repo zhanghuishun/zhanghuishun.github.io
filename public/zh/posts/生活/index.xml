@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>life on WilliamZ&#39;s Blog</title>
+    <link>http://localhost:1313/zh/posts/%E7%94%9F%E6%B4%BB/</link>
+    <description>Recent content in life on WilliamZ&#39;s Blog</description>
+    <generator>Hugo -- 0.128.2</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 06 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/posts/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>life</title>
+      <link>http://localhost:1313/zh/posts/%E7%94%9F%E6%B4%BB/%E4%BB%A3%E5%B0%94%E5%A4%AB%E7%89%B9%E8%AE%B0%E5%BF%86/</link>
+      <pubDate>Tue, 06 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/%E7%94%9F%E6%B4%BB/%E4%BB%A3%E5%B0%94%E5%A4%AB%E7%89%B9%E8%AE%B0%E5%BF%86/</guid>
+      <description>9月5日，周一，新生开学第一天早上。我在大为的陪同下到火车站，准备去阿姆做核酸。新生们从四面八方涌到车站，乘着公交车，电车，火车过来，一个个</description>
+    </item>
+  </channel>
+</rss>
