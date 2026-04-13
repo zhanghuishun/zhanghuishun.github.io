@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+:root {
+  --bg-1: rgb(249, 246, 241);
+  --bg-2: rgb(241, 249, 246);
+  --bg-3: rgb(246, 241, 249);
+  --ink: #1a1a1a;
+  --muted: #4d4d4d;
+  --text-subtle: #686868;
+  --line: rgba(26, 26, 26, 0.065);
+  --focus-ring: rgba(26, 26, 26, 0.14);
+  --work-active-bg: rgba(26, 26, 26, 0.04);
+  --placeholder-bg: rgba(26, 26, 26, 0.06);
+  --placeholder-border: rgba(26, 26, 26, 0.08);
+  --font-serif: "Noto Serif SC", "Source Serif Pro", "Apple Color Emoji", serif;
+  --font-mixed: "Inter", "Noto Serif SC", "Source Serif Pro", "PingFang SC", "Microsoft YaHei", serif;
+  /* 首页与详情页阅读宽度分离，互不共用同一 max-width */
+  --content-max-index: min(27.5rem, 100%);
+  --content-max-detail: min(40rem, 100%);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-serif);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gradient-container {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(20deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  transition: background 2s ease-in-out;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+}
+
+.sheet {
+  box-sizing: border-box;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding: clamp(0.85rem, 2.8vw, 1.5rem) clamp(1rem, 4vw, 2rem) clamp(2rem, 5vw, 3rem);
+}
+
+.sheet-inner {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.script-latin {
+  font-family: var(--font-mixed);
+  margin-inline: 0.12em;
+}
+
+.foot {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mixed);
+  font-size: 0.8125rem;
+  letter-spacing: -0.02em;
+  color: #777;
+  text-align: left;
+}
+
+.foot-dot {
+  display: inline;
+  margin-inline: 0.38em;
+  opacity: 0.45;
+  user-select: none;
+}
+
+.foot a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.foot a:hover {
+  color: var(--ink);
+}
+
+/* 页脚内非链接文案（邮箱、电话）：无指针手型，避免像可点元素 */
+.foot > span:not(.foot-dot) {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-container {
+    transition: none;
+  }
+}
+

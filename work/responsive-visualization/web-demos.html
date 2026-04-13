@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="多设备下图表的响应式设计：体验原则、柱状图适配与 Vibe Coding 调试工具。">
+    <title>响应式图表设计 · 张惠舜</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='6' fill='%231a1a1a' opacity='0.32'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/base.css">
+    <link rel="stylesheet" href="../../styles/components.css">
+</head>
+<body>
+
+    <div class="gradient-container" id="bg" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <article class="sheet sheet-detail">
+        <div class="sheet-inner">
+            <a class="back" href="../../protofolio.html">← 返回作品集</a>
+
+            <h1 class="detail-title">移动端多设备的图表响应式设计</h1>
+
+            <div class="detail-meta">
+                <span class="detail-time">2025.6 – 2025.7</span>
+                <ul class="tag-list" aria-label="标签">
+                    <li><span class="tag-pill">图表设计</span></li>
+                    <li><span class="tag-pill">Vibe Coding</span></li>
+                </ul>
+            </div>
+
+            <div class="prose">
+                <h2>项目价值</h2>
+                <div class="value-cards">
+                    <article class="value-card" aria-labelledby="value-card-efficiency">
+                        <h3 class="value-card__title" id="value-card-efficiency">大幅降低产研成本</h3>
+                        <p>从「像素驱动」转向「逻辑驱动」，<br>
+                            <span class="value-metrics-one-line">视觉还原度达到<span lang="en" class="script-latin">100%</span>，减少走查时间约<span lang="en" class="script-latin">50%</span>。</span></p>
+                    </article>
+                    <article class="value-card" aria-labelledby="value-card-feedback">
+                        <h3 class="value-card__title" id="value-card-feedback">用户主观评价提升</h3>
+                        <ul class="value-card__list">
+                            <li>「更有呼吸感，看着不挤」</li>
+                            <li>「折叠屏展开，图表与表格<span class="value-quote-keep">能同屏看</span>」</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <h2>项目背景</h2>
+                <blockquote class="pullquote" cite="HarmonyOS多设备响应式设计">「终端设备形态日益多样化，应用设计需要考虑界面能适配不同的屏幕尺寸、屏幕方向和设备类型。同时要保持多设备体验的连续性」<cite>——HarmonyOS多设备响应式设计</cite></blockquote>
+                <p>随着HarmonyOS生态的快速扩张，我们的B端产品正从单一的直板手机向折叠屏、平板等多终端形态延伸。在这一过程中，作为核心业务组件的“数据图表”面临着前所未有的适配挑战。简单等比拉伸造成大屏空间浪费，信息密度不足，用户阅读困难的问题。</p>
+                <h2>体验原则</h2>
+                <p>在我们的业务场景中，图表常用于分析决策，因此需要在多设备上保持「同一套语义且接近一致的视觉密度」，并在保证体验连续的前提下让大屏获得合理增值，为此我们制定了如下原则：</p>
+                <ul>
+                    <li><strong>体验连续</strong>——图表的「数据可读性与信息密度」随屏幕变化应尽量平滑，避免因拉伸导致柱子过粗或过细，从而改变读数难度与视觉权重。</li>
+                    <li><strong>体验可控</strong>——关键视觉参数（例如柱宽、组内间距、组数）必须有可解释的计算口径，便于设计、前端与产品对齐。</li>
+                    <li><strong>体验增值</strong>——当屏幕变大时，不是盲目放大图形，而是通过展示更多类目（或更完整的数据窗口）提升信息量。</li>
+                </ul>
+
+                <h2>适配图表类型</h2>
+                <p>根据统计，常用图表大致为：柱状图（<span lang="en" class="script-latin">35%</span>）、折线图与面积图（<span lang="en" class="script-latin">30%</span>）、环形图（<span lang="en" class="script-latin">20%</span>）、条形图（<span lang="en" class="script-latin">10%</span>）、其他（<span lang="en" class="script-latin">5%</span>）。不论使用频率还是适配难度，柱状图都是重难点；下文以柱状图为主线展开。</p>
+
+                <h2>柱状图适配分析</h2>
+
+                <h3>一、用合理留白突出柱体</h3>
+                <p>柱状图分为三种：单柱状图、堆叠柱状图、分组柱状图。尽管形态各异，设计核心是一致的：通过视觉引导凸显各分类间的数量差异。遵循格式塔心理学中的<strong>「主体—背景（Figure-Ground）」</strong>原则，应将柱体塑造为视觉主体，通过合理留白提供呼吸空间，让注意力落在数据本身。</p>
+
+                <h3>二、找到合理柱宽比例</h3>
+                <p>在明确留白的重要性之后，核心挑战是如何量化柱体与「槽位」的比例，这需要从拆解<span lang="en" class="script-latin">X</span>轴的物理空间开始：</p>
+                <ol>
+                    <li>界定空间：从卡片总宽中剔除边距与标签区，得到真实绘图区域。</li>
+                    <li>划定单元：将区域按组数等分，得到「槽位」。</li>
+                </ol>
+                <p>由此可锁定关键变量<strong>柱宽比（BarWidthRatio）</strong>：在有限单元里，柱子占多少、留白留多少，决定图表的呼吸感与易读性。</p>
+
+                <figure class="figure-block" aria-label="柱状图槽位与柱宽拆解示意">
+                    <img class="figure-img" src="柱状图拆解.png" loading="lazy" decoding="async" alt="柱状图布局拆解：边距、Y轴标签区域、槽位、柱宽与X轴区域的对应关系示意">
+                </figure>
+
+                <h3>三、指定图表库调节参数</h3>
+                <p>不同图表库对该变量的定义不同：<span lang="en" class="script-latin">Ant G2Plot</span>可使用<span class="code-inline">columnWidthRatio</span>；<span lang="en" class="script-latin">Highcharts</span>可通过<span class="code-inline">pointPadding</span>控制留白比例。我们使用的<span lang="en" class="script-latin">ECharts</span>则用<span class="code-inline">barWidth</span>调节柱子占槽位的宽度。</p>
+
+                <h3>四、寻找柱宽比：传统设计稿与可交互原型</h3>
+                <p>在本项目中，我没有采用「按固定尺寸画多稿」的方式：一方面工作量大，另一方面它难以承载<strong>连续变化的体验逻辑</strong>。在条形图响应式场景中，至少同时存在：</p>
+                <ol>
+                    <li>画布宽度随设备形态或用户操作变化（如旋转）。</li>
+                    <li>类目数量可能因用户操作变化（增删类目）。</li>
+                    <li>分组数量会影响柱间距与可展示密度。</li>
+                </ol>
+                <p>若按多稿覆盖，需要为多种「尺寸×参数」组合分别出图；即便画得出来，也只能验证某一帧，难以表达拖拽与切换时的连续反馈，也就不易回答「为何这样响应式更合理」。</p>
+
+                <h2>演示效果</h2>
+                <p>我用<span lang="en" class="script-latin">Vibe Coding</span>的形式开发了一个工具，可直观查看不同参数下图表形态与变化；工具内可调：画布宽度、分组数量、类目数量、柱宽比等。</p>
+
+                <figure class="figure-block figure-tool-demo" aria-label="工具演示视频">
+                    <div class="figure-tool-demo__inner" id="tool-demo-wrap">
+                        <video
+                            id="tool-demo-video"
+                            class="figure-tool-demo__video"
+                            src="工具演示-1.9zoom.mp4"
+                            playsinline
+                            preload="metadata"
+                            aria-label="ECharts 响应式调参工具操作演示">
+                            您的浏览器不支持视频播放，可使用文末在线 Demo 链接体验。
+                        </video>
+                        <div class="figure-tool-demo__overlay" id="tool-demo-overlay">
+                            <button type="button" class="figure-tool-demo__play" id="tool-demo-play" aria-label="播放演示视频">
+                                <svg class="figure-tool-demo__play-icon" width="40" height="40" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                    <path fill="currentColor" d="M14 10v28l22-14L14 10z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </figure>
+                <p>同样地，对于折线图和环形图，我也通过定义关键变量（最小点间距和内外环比），保证在不同设备上保持体验连续。</p>
+                <h2>结果展示</h2>
+                <figure class="figure-block" aria-label="落地效果占位">
+                    <div class="media-placeholder media-placeholder--wide">落地效果 · 图片占位</div>
+                </figure>
+                <p>你可以在浏览器中直接体验这个调参工具：<a href="https://zhanghuishun.github.io/Echarts-responsive-visualization-tool/" target="_blank" rel="noopener noreferrer"><span lang="en" class="script-latin">ECharts</span>&#8239;响应式调参&#8239;<span lang="en" class="script-latin">Demo</span></a></p>
+            </div>
+
+            <footer class="foot"><a href="../../protofolio.html">首页</a><span class="foot-dot" aria-hidden="true">·</span><a href="https://github.com/zhanghuishun" rel="noopener noreferrer">GitHub</a></footer>
+        </div>
+    </article>
+
+    <script>
+        (function () {
+            const bgElement = document.getElementById('bg');
+            if (!bgElement) return;
+
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (reduceMotion) return;
+
+            let vals = [249, 246, 241];
+            let activeIndex = 0;
+            let step = -1;
+
+            function animate() {
+                vals[activeIndex] += step;
+
+                if (vals[activeIndex] >= 249) {
+                    vals[activeIndex] = 249;
+                    activeIndex = (activeIndex + 1) % 3;
+                    step = -1;
+                } else if (vals[activeIndex] <= 241) {
+                    vals[activeIndex] = 241;
+                    activeIndex = (activeIndex + 1) % 3;
+                    step = 1;
+                }
+
+                const [x, y, z] = vals;
+                bgElement.style.setProperty("--bg-1", `rgb(${x}, ${y}, ${z})`);
+                bgElement.style.setProperty("--bg-2", `rgb(${y}, ${z}, ${x})`);
+                bgElement.style.setProperty("--bg-3", `rgb(${z}, ${x}, ${y})`);
+
+                setTimeout(function () {
+                    requestAnimationFrame(animate);
+                }, 600);
+            }
+
+            animate();
+        })();
+
+        (function () {
+            const wrap = document.getElementById("tool-demo-wrap");
+            const video = document.getElementById("tool-demo-video");
+            const overlay = document.getElementById("tool-demo-overlay");
+            const playBtn = document.getElementById("tool-demo-play");
+            if (!wrap || !video || !overlay || !playBtn) return;
+
+            video.controls = false;
+
+            function syncUiFromVideo() {
+                var playing = !video.paused && !video.ended;
+                wrap.classList.toggle("is-playing", playing);
+                if (playing) {
+                    overlay.setAttribute("tabindex", "0");
+                    overlay.setAttribute("role", "button");
+                    overlay.setAttribute("aria-label", "暂停演示视频");
+                    playBtn.setAttribute("tabindex", "-1");
+                    playBtn.setAttribute("aria-hidden", "true");
+                    if (document.activeElement === playBtn) {
+                        overlay.focus();
+                    }
+                } else {
+                    if (document.activeElement === overlay) {
+                        playBtn.focus();
+                    }
+                    overlay.removeAttribute("tabindex");
+                    overlay.removeAttribute("role");
+                    overlay.removeAttribute("aria-label");
+                    playBtn.removeAttribute("tabindex");
+                    playBtn.removeAttribute("aria-hidden");
+                    playBtn.setAttribute("aria-label", "播放演示视频");
+                }
+            }
+
+            function togglePlayback() {
+                if (video.ended) {
+                    video.currentTime = 0;
+                }
+                if (video.paused) {
+                    video.play().catch(function () {
+                        syncUiFromVideo();
+                    });
+                } else {
+                    video.pause();
+                }
+            }
+
+            overlay.addEventListener("click", function () {
+                togglePlayback();
+            });
+
+            overlay.addEventListener("keydown", function (ev) {
+                if (ev.key !== "Enter" && ev.key !== " ") return;
+                if (!wrap.classList.contains("is-playing")) return;
+                ev.preventDefault();
+                togglePlayback();
+            });
+
+            video.addEventListener("play", syncUiFromVideo);
+            video.addEventListener("pause", syncUiFromVideo);
+            video.addEventListener("ended", function () {
+                video.currentTime = 0;
+                syncUiFromVideo();
+            });
+
+            syncUiFromVideo();
+        })();
+    </script>
+</body>
+</html>
