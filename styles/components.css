@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* 阻止纯展示文本区域出现插入光标（如浏览器开启光标浏览模式） */
+  caret-color: transparent;
 }
 
 .sheet-index .sheet-inner {
