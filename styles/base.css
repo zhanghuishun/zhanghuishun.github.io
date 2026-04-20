@@ -13,7 +13,8 @@
   --placeholder-bg: rgba(26, 26, 26, 0.06);
   --placeholder-border: rgba(26, 26, 26, 0.08);
   --font-serif: "Noto Serif SC", "Source Serif Pro", "Apple Color Emoji", serif;
-  --font-mixed: "Inter", "Noto Serif SC", "Source Serif Pro", "PingFang SC", "Microsoft YaHei", serif;
+  --font-mixed: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-reading-sans: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
   /* 首页与详情页阅读宽度分离，互不共用同一 max-width */
   --content-max-index: min(27.5rem, 100%);
   --content-max-detail: min(40rem, 100%);

@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: var(--content-max-index);
+  max-width: clamp(27.5rem, 56vw, var(--content-max-detail));
   text-autospace: ideograph-alpha ideograph-numeric;
 }
 
@@ -31,19 +31,20 @@
 }
 
 .brand-line {
-  font-size: clamp(1.35rem, 3.6vw, 1.875rem);
+  font-size: clamp(1.35rem, 2.4vw, 2.05rem);
   font-weight: 400;
   letter-spacing: 0.03em;
   line-height: 1.25;
-  margin: 0 0 0.4rem;
+  margin: 0 0 clamp(0.4rem, 0.75vh, 0.7rem);
   opacity: 0.92;
 }
 
 .tagline {
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  line-height: 1.55;
+  font-family: var(--font-reading-sans);
+  font-size: clamp(0.875rem, 1.45vw, 1.0625rem);
+  line-height: 1.66;
   color: var(--muted);
-  margin: 0 0 0.75rem;
+  margin: 0 0 clamp(0.75rem, 1.3vh, 1.15rem);
   letter-spacing: normal;
 }
 
@@ -62,13 +63,13 @@
 
 .content-stack {
   width: 100%;
-  margin-top: 0.5rem;
-  padding-top: 0.75rem;
+  margin-top: clamp(0.5rem, 1vh, 0.95rem);
+  padding-top: clamp(0.75rem, 1.3vh, 1.15rem);
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 1.35rem;
+  gap: clamp(1.35rem, 2.6vh, 2.2rem);
 }
 
 .stack-section {
@@ -76,11 +77,11 @@
 }
 
 .col-title {
-  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 0.95vw, 0.825rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-subtle);
-  margin: 0 0 0.55rem;
+  margin: 0 0 clamp(0.55rem, 0.9vh, 0.8rem);
   text-align: left;
   display: flex;
   align-items: center;
@@ -96,8 +97,9 @@ ol.timeline {
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
-  line-height: 1.45;
+  font-family: var(--font-reading-sans);
+  font-size: clamp(0.8125rem, 1.05vw, 0.98rem);
+  line-height: 1.52;
   color: var(--muted);
   letter-spacing: normal;
 }
@@ -108,7 +110,7 @@ ol.timeline {
   flex-wrap: nowrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.65rem 1rem;
+  gap: clamp(0.65rem, 1.1vh, 0.95rem) clamp(1rem, 1.8vw, 1.5rem);
   width: 100%;
 }
 
@@ -123,7 +125,7 @@ ol.timeline {
 
 .timeline-event strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .timeline-sep {
@@ -177,7 +179,7 @@ ol.timeline {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: clamp(0.35rem, 0.7vh, 0.6rem);
 }
 
 .work-list > li {
@@ -189,14 +191,14 @@ ol.timeline {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  padding: 0.4rem 0;
+  padding: clamp(0.4rem, 0.65vh, 0.62rem) 0;
   margin: 0;
   border-radius: 0;
   border: none;
   text-decoration: none;
   color: inherit;
   font-family: var(--font-mixed);
-  font-size: clamp(0.875rem, 1.9vw, 0.9375rem);
+  font-size: clamp(0.875rem, 1.05vw, 1rem);
   letter-spacing: normal;
   font-variant-numeric: lining-nums proportional-nums;
   text-align: left;
@@ -258,9 +260,21 @@ ol.timeline {
 
 .work-item__desc {
   display: block;
-  font-size: 0.92em;
+  font-family: var(--font-reading-sans);
+  font-size: clamp(0.9em, 0.88em + 0.14vw, 0.96em);
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.62;
+}
+
+@media (min-width: 80rem) and (min-height: 52rem) {
+  .sheet-index {
+    justify-content: flex-start;
+  }
+
+  .sheet-index .sheet-inner {
+    min-height: calc(100dvh - clamp(2.85rem, 7vw, 5rem));
+    justify-content: space-between;
+  }
 }
 
 .work-item__desc > .script-latin:first-child {
@@ -314,7 +328,7 @@ ol.timeline {
 .detail-meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 0.65rem 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -335,6 +349,7 @@ ol.timeline {
 .tag-list {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem;
   list-style: none;
   margin: 0;
@@ -342,18 +357,21 @@ ol.timeline {
 }
 
 .tag-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.35);
   color: var(--muted);
   font-size: 0.75rem;
+  line-height: 1.2;
   font-weight: 500;
   letter-spacing: 0.04em;
 }
 
 .prose {
+  font-family: var(--font-reading-sans);
   font-size: clamp(0.875rem, 1.95vw, 0.9375rem);
   line-height: 1.68;
   color: var(--muted);
@@ -387,6 +405,7 @@ ol.timeline {
 }
 
 .prose h2 {
+  font-family: var(--font-serif);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
