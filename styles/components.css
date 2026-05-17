@@ -6,7 +6,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   /* 阻止纯展示文本区域出现插入光标（如浏览器开启光标浏览模式） */
   caret-color: transparent;
 }
@@ -267,13 +267,14 @@ ol.timeline {
 }
 
 @media (min-width: 80rem) and (min-height: 52rem) {
-  .sheet-index {
-    justify-content: flex-start;
-  }
+  /* justify-content stays center — no jump at 80rem breakpoint */
 
   .sheet-index .sheet-inner {
     min-height: calc(100dvh - clamp(2.85rem, 7vw, 5rem));
-    justify-content: space-between;
+  }
+
+  .sheet-index .foot {
+    margin-top: auto;
   }
 }
 
