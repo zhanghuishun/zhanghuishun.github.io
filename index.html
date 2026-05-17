@@ -52,32 +52,46 @@
                         <ul class="work-list">
                             <li>
                                 <a class="work-item" href="work/rd-platform.html" aria-label="研发一站式平台，查看详情">
-                                    <span class="work-item__name">研发一站式平台</span>
-                                    <span class="work-item__desc"><span lang="en" class="script-latin">0-1</span>项目，满意度<span lang="en" class="script-latin">47.6%→62.4%</span>，关键流程效率提升<span lang="en" class="script-latin">60%+</span>。</span>
+                                    <span class="work-item__img" aria-hidden="true">
+                                        <img src="work/images/rd-platform.png" alt="" loading="lazy">
+                                    </span>
+                                    <span class="work-item__panel">
+                                        <span class="work-item__name">研发一站式平台</span>
+                                        <span class="work-item__desc"><span lang="en" class="script-latin">0-1</span>项目，满意度<span lang="en" class="script-latin">47.6%→62.4%</span>，关键流程效率提升<span lang="en" class="script-latin">60%+</span>。</span>
+                                    </span>
                                 </a>
                             </li>
                             <li>
                                 <a class="work-item" href="work/arch-viz.html" aria-label="代码架构可视化，查看详情">
-                                    <span class="work-item__name">代码架构可视化</span>
-                                    <span class="work-item__desc">新人工程师上手时间<span lang="en" class="script-latin">2</span>周→<span lang="en" class="script-latin">3</span>天；结合数据可视化交互，协助架构师提前识别潜在风险。</span>
+                                    <span class="work-item__img" aria-hidden="true">
+                                        <img src="work/images/arch-viz.png" alt="" loading="lazy">
+                                    </span>
+                                    <span class="work-item__panel">
+                                        <span class="work-item__name">代码架构可视化</span>
+                                        <span class="work-item__desc">新人工程师上手时间<span lang="en" class="script-latin">2</span>周→<span lang="en" class="script-latin">3</span>天；结合数据可视化交互，协助架构师提前识别潜在风险。</span>
+                                    </span>
                                 </a>
                             </li>
                             <li>
-                                <a class="work-item" href="work/harmony-ai-plugin.html" aria-label="鸿蒙 AI 代码转换插件，查看详情">
-                                    <span class="work-item__name">鸿蒙<span lang="en" class="script-latin">AI</span>代码转换插件</span>
-                                    <span class="work-item__desc">面向鸿蒙转写场景，转写提效<span lang="en" class="script-latin">30%+</span>。</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="work-item" href="work/design-ai-skillkit.html" aria-label="设计团队 AI 工作流，查看详情">
-                                    <span class="work-item__name">设计团队<span lang="en" class="script-latin">AI</span>工作流/<span lang="en" class="script-latin">Skill Kit</span></span>
-                                    <span class="work-item__desc">搭建全流程<span lang="en" class="script-latin">AI</span>工作流与多个<span lang="en" class="script-latin">Skill Kit</span>；<span lang="en" class="script-latin">30+</span>设计师团队提效<span lang="en" class="script-latin">30%+</span>。</span>
+                                <a class="work-item" href="https://github.com/zhanghuishun/ux-designer-skill-lab" target="_blank" rel="noopener noreferrer" aria-label="设计团队 AI 工作流，查看详情">
+                                    <span class="work-item__img" aria-hidden="true">
+                                        <img src="work/images/skill-kit.png" alt="" loading="lazy">
+                                    </span>
+                                    <span class="work-item__panel">
+                                        <span class="work-item__name">设计团队<span lang="en" class="script-latin">AI</span>工作流/<span lang="en" class="script-latin">Skill Kit</span></span>
+                                        <span class="work-item__desc">搭建全流程<span lang="en" class="script-latin">AI</span>工作流与多个<span lang="en" class="script-latin">Skill Kit</span>；<span lang="en" class="script-latin">30+</span>设计师团队提效<span lang="en" class="script-latin">30%+</span>。</span>
+                                    </span>
                                 </a>
                             </li>
                             <li>
                                 <a class="work-item" href="work/responsive-visualization/web-demos.html" aria-label="移动端多设备图表的响应式设计，查看详情">
-                                    <span class="work-item__name">移动端多设备的图表响应式设计</span>
-                                    <span class="work-item__desc">采用参数化设计，大幅降低产研成本并提升用户主观评价。</span>
+                                    <span class="work-item__img" aria-hidden="true">
+                                        <img src="work/images/responsive-viz.png" alt="" loading="lazy">
+                                    </span>
+                                    <span class="work-item__panel">
+                                        <span class="work-item__name">移动端多设备的图表响应式设计</span>
+                                        <span class="work-item__desc">采用参数化设计，大幅降低产研成本并提升用户主观评价。</span>
+                                    </span>
                                 </a>
                             </li>
                         </ul>
@@ -127,6 +141,32 @@
             }
 
             animate();
+        })();
+
+        (function () {
+            var wrap = document.querySelector('.work-wrap');
+            if (!wrap) return;
+
+            var cursor = document.createElement('div');
+            cursor.className = 'work-cursor';
+            wrap.appendChild(cursor);
+
+            wrap.addEventListener('mouseenter', function () {
+                wrap.classList.add('is-active');
+            });
+
+            wrap.addEventListener('mouseleave', function () {
+                wrap.classList.remove('is-active');
+            });
+
+            wrap.addEventListener('mousemove', function (e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+
+            if ('ontouchstart' in window) {
+                cursor.style.display = 'none';
+            }
         })();
     </script>
 </body>
